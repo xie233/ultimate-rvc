@@ -22,6 +22,7 @@ image: "r8.im/meta-innovation/heart_mula"
 build:
   gpu: true
   python_version: "3.12"
+  cuda: "12.4"
 
   system_packages:
     - "ffmpeg"
