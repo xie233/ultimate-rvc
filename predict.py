@@ -7,6 +7,7 @@ import sys
 import uuid
 import zipfile
 from pathlib import Path
+from urllib.request import urlretrieve
 
 # Make the ultimate_rvc package importable inside the Cog container.
 # Cog copies the project to /src, so the package root is /src/src.
@@ -15,22 +16,41 @@ sys.path.insert(0, "/src/src")
 from cog import BasePredictor, Input
 from cog import Path as CogPath
 
-from ultimate_rvc.common import VOICE_MODELS_DIR
+from ultimate_rvc.common import RVC_MODELS_DIR, VOICE_MODELS_DIR
 from ultimate_rvc.core.generate.song_cover import run_pipeline
 from ultimate_rvc.typing_extra import AudioExt, F0Method
+
+# HuggingFace 资源，与 prerequisites_download 一致
+PREREQUISITES_BASE = (
+    "https://huggingface.co/JackismyShephard/ultimate-rvc/resolve/main/Resources"
+)
+PREDICTOR_FILES = ("rmvpe.pt", "fcpe.pt")
+
+
+def _ensure_predictors() -> None:
+    """Download RVC predictor models (rmvpe.pt, fcpe.pt) if missing."""
+    predictors_dir = RVC_MODELS_DIR / "predictors"
+    predictors_dir.mkdir(parents=True, exist_ok=True)
+    for name in PREDICTOR_FILES:
+        path = predictors_dir / name
+        if path.is_file():
+            continue
+        url = f"{PREREQUISITES_BASE}/predictors/{name}"
+        urlretrieve(url, path)
 
 
 class Predictor(BasePredictor):
     """Cog predictor that generates an AI song cover via RVC voice conversion."""
 
     def setup(self) -> None:
-        """Pre-initialise binaries and required directories."""
+        """Pre-initialise binaries, required directories, and predictor models."""
         import static_ffmpeg
         import static_sox
 
         static_ffmpeg.add_paths()
         static_sox.add_paths()
         VOICE_MODELS_DIR.mkdir(parents=True, exist_ok=True)
+        _ensure_predictors()
 
     def predict(
         self,
