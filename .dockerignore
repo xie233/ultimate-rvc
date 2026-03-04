@@ -1,0 +1,52 @@
+# Version control
+.git/
+.github/
+
+# Development and testing
+tests/
+notebooks/
+notes/
+htmlcov/
+.pytest_cache/
+.hypothesis/
+.coverage
+.coverage.*
+coverage.xml
+
+# Documentation and images
+images/
+*.md
+!README.md
+
+# Build artifacts
+uv/
+uv.lock
+*.egg-info/
+dist/
+build/
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+
+# Large runtime directories (populated at inference time)
+audio/
+models/
+config/
+temp/
+
+# Dev tool configs
+.pre-commit-config.yaml
+.markdownlint.json
+.pytype/
+.mypy_cache/
+.dmypy.json
+.pyre/
+.idea/
+.vscode/
+.env

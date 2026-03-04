@@ -1,4 +1,5 @@
 # Ultimate RVC project
+.cog/
 audio/*
 models/*
 config/*

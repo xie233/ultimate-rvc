@@ -1,0 +1,41 @@
+# Cog 构建用：仅 PyPI，Linux x86_64 上 torch 2.6.0 即 cu124
+torch==2.6.0
+torchaudio==2.6.0
+
+# Core
+pydantic==2.11.7
+lazy-loader==0.4.0
+typer==0.20.0
+
+# Networking
+requests==2.32.5
+yt_dlp[default]>=2025.11.12
+nodejs-wheel-binaries==24.12.0
+wget==3.2
+
+# Data science
+numpy==2.3.5
+scipy==1.16.3
+tqdm==4.67.1
+
+# Machine learning
+torchcrepe==0.0.24
+faiss-cpu==1.13.1
+onnxruntime-gpu==1.23.2
+local-attention==1.11.2
+einops==0.8.1
+transformers==4.57.3
+torchfcpe==0.0.4
+
+# Audio
+static-ffmpeg==2.13
+static-sox==1.0.2
+typed-ffmpeg==3.8.1
+soundfile==0.13.1
+librosa==0.11.0
+sox==1.5.0
+soxr==1.0.0
+pydub==0.25.1
+pedalboard==0.9.19
+audio-separator[gpu]==0.40.0
+noisereduce==3.0.3
